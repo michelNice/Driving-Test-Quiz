@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driving Test Quiz</title>
+    <link rel="stylesheet" href="sass/main.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Driving Test Quiz</h1>
+    </header>
+
+    <main class="container">
+        <p>Time Remaining: <span id="timer">20:00</span></p>
+        <section class="start-section">
+            <button id="start-quiz" type="button"">Start Quiz</button>
+        </section>
+        <section class="quiz-container hidden">
+            
+            <h3 id="question-text">Question will go here</h3>
+            <div id="options-container">
+                <div class="answer-container">
+                    <input type="radio" id="ansOne" name="answer" value="a">
+                    <label for="ansOne">Answer One</label>
+                </div>
+                <div class="answer-container">
+                    <input type="radio" id="ansTwo" name="answer" value="b">
+                    <label for="ansTwo">Answer Two</label>
+                </div>
+                <div class="answer-container">
+                    <input type="radio" id="ansThree" name="answer" value="c">
+                    <label for="ansThree">Answer Three</label>
+                </div>
+                <div class="answer-container">
+                    <input type="radio" id="ansFour" name="answer" value="d">
+                    <label for="ansFour">Answer Four</label>
+                </div>
+            </div>
+            
+            <div class="navigation-buttons">
+                <button id="prev-btn" class="hidden">Prev</button>
+                <button id="next-btn">Next</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
