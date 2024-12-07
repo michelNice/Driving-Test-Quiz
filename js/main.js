@@ -1,212 +1,149 @@
 const quizQuestions = [
-
     {
-         question:'What is the legal blood alcohol concentration (BAC) limit for drivers in most countries?',
-         options:{
-            a:'0.08%',
-            b:'0.10%',
-            c:'0.05%',
-            d:'0.15%',
-         },
-
-         correctAnswer:'a'
-    },
-
-    {
-
-        question:'When should you use your car’s horn?',
-        options:{
-           a:'To warn others of danger',
-           b:'To express frustration',
-           c:'To tell someone to drive faster',
-           d:'To greet a friend', 
+        question: 'What is the legal blood alcohol concentration (BAC) limit for drivers in most countries?',
+        options: {
+            a: '0.08%',
+            b: '0.10%',
+            c: '0.05%',
+            d: '0.15%',
         },
-        
-        correctAnswer:'a'
+        correctAnswer: 'a'
     },
-
     {
-        question:'What does a red traffic light mean?',
-        options:{
-            a:'Stop',
-            b:'Slow down',
-            c:'Proceed with caution',
-            d:'Speed up',  
+        question: 'When should you use your car’s horn?',
+        options: {
+            a: 'To warn others of danger',
+            b: 'To express frustration',
+            c: 'To tell someone to drive faster',
+            d: 'To greet a friend',
         },
-       
-        correctAnswer:'a'
-
+        correctAnswer: 'a'
     },
-    
     {
-        question:'What is the correct action when approaching a pedestrian at a crosswalk?',
-        options:{
-            a:'Speed up and pass before the pedestrian crosses',
-            b:'Stop and let the pedestrian cross',
-            c:'Honk at the pedestrian to hurry',
-            d:'Ignore the pedestrian if they are not paying attention',
+        question: 'What does a red traffic light mean?',
+        options: {
+            a: 'Stop',
+            b: 'Slow down',
+            c: 'Proceed with caution',
+            d: 'Speed up',
         },
-        
+        correctAnswer: 'a'
+    },
+    {
+        question: 'What is the correct action when approaching a pedestrian at a crosswalk?',
+        options: {
+            a: 'Speed up and pass before the pedestrian crosses',
+            b: 'Stop and let the pedestrian cross',
+            c: 'Honk at the pedestrian to hurry',
+            d: 'Ignore the pedestrian if they are not paying attention',
+        },
+        correctAnswer: 'b'
+    }
+];
 
-        correctAnswer:'b'
+let currentQuestionIndex = 0;
+let score = 0;
+
+function renderQuiz() {
+    const questionContainer = document.querySelector('#question-text');
+    const optionsContainer = document.querySelector('#options-container');
+
+    const currentQuestion = quizQuestions[currentQuestionIndex];
+
+    // Set the question text
+    questionContainer.textContent = currentQuestion.question;
+
+    // Clear existing options
+    optionsContainer.innerHTML = '';
+
+    // Populate options dynamically
+    Object.keys(currentQuestion.options).forEach(optionKey => {
+        const answerContainer = document.createElement('div');
+        answerContainer.className = 'answer-container';
+
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.id = `option-${optionKey}`;
+        input.name = 'answer';
+        input.value = optionKey;
+
+        const label = document.createElement('label');
+        label.htmlFor = `option-${optionKey}`;
+        label.textContent = currentQuestion.options[optionKey];
+
+        answerContainer.appendChild(input);
+        answerContainer.appendChild(label);
+        optionsContainer.appendChild(answerContainer);
+    });
+
+    // Adjust navigation buttons visibility
+    document.querySelector('#prev-btn').classList.toggle('hidden', currentQuestionIndex === 0);
+    document.querySelector('#next-btn').classList.toggle('hidden', currentQuestionIndex === quizQuestions.length - 1);
+    document.querySelector('#submit-test').classList.toggle('hidden', currentQuestionIndex !== quizQuestions.length - 1);
+}
+
+function checkAnswer() {
+    const selectedOption = document.querySelector('input[name="answer"]:checked');
+    if (!selectedOption) {
+        alert('Please select an answer.');
+        return;
     }
 
-    ,
+    const currentQuestion = quizQuestions[currentQuestionIndex];
+    if (selectedOption.value === currentQuestion.correctAnswer) {
+        score++;
+    }
 
-    {
-        question:'What should you do if your car starts to skid?',
-        options:{
-          a:'Slam on the brakes',
-          b:'Turn the steering wheel in the opposite direction of the skid',
-          c:'Turn the steering wheel in the direction of the skid',
-          d:'Accelerate',
-   
+    currentQuestionIndex++;
+
+    if (currentQuestionIndex < quizQuestions.length) {
+        renderQuiz();
+    } else {
+        endQuiz();
+    }
+}
+
+function endQuiz() {
+    const questionContainer = document.querySelector('#question-text');
+    const optionsContainer = document.querySelector('#options-container');
+    questionContainer.textContent = `Quiz Complete! Your score is ${score}/${quizQuestions.length}.`;
+    optionsContainer.innerHTML = '';
+    document.querySelector('.navigation-buttons').classList.add('hidden');
+    document.querySelector('#submit-test').classList.add('hidden');
+}
+
+function startTimer() {
+    const display = document.querySelector('#timer');
+    let time = 20 * 60; // 20 minutes in seconds
+
+    const interval = setInterval(() => {
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        display.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        time--;
+
+        if (time < 0) {
+            clearInterval(interval);
+            endQuiz();
         }
-        ,
-        correctAnswer:'c'
-       
-    }
-
-    ,
-
-    {
-        question:'What is the primary purpose of seat belts?',
-
-        options:{
-            a:'To keep you comfortable',
-            b:'To protect you during a collision',
-            c:'To avoid police fines',
-            d:'To improve fuel efficiency',  
-        },
-        
-        correctAnswer:'c'
-    },
-
-
-    {
-       
-        question:'What is the safest distance to keep between your car and the vehicle in front of you?',
-        options:{
-            a:'1 second',
-            b:'2 seconds',
-            c:'5 seconds',
-            d:'10 seconds',
-        },
-        
-
-        correctAnswer:'b'
-
-    }
-    ,
-   
-    {
-
-        question:'When should you turn on your headlights?',
-        options:{
-           a:'Only at night',
-            b:'During the day in well-lit areas',
-            c:'When visibility is poor, such as in fog or heavy rain',
-            d:' Only when other cars flash their headlights at you',
-        },
-        
-        correctAnswer:'d'
-    }
-
-]
-
-const start = document.querySelector('#start-quiz')
-const answerOne = document.querySelector('#ansOne')
-const answerTwo = document.querySelector('#ansTwo')
-const answerThree = document.querySelector('#ansThree')
-const answerFour = document.querySelector('#ansFour')
-const quizData = [answerOne,answerTwo,answerThree,answerFour]
-start.addEventListener('click',startTimer)
-
-let currentQuestionIndex = 0
-let userAnswers = []
-let score = 0
-
-
-function renderQuiz(){
-
-    const questionConteiner = document.querySelector('.quiz-container')
-
-    const optionsConteiner = document.querySelector('.options-container')
-
-    const currentQuestion = quizQuestions[currentQuestionIndex]
-
-    questionConteiner.textContent = currentQuestion.question
-
-    optionsConteiner.innerHTML = ''
-
-
-    Object.keys(currentQuestion.options).forEach(optionKey =>{
-
-         const optionButton = document.createElement('button')
-
-        optionButton.textContent = currentQuestion.options[optionKey];
-
-        optionButton.addEventListener('click', function(){
-
-
-        })
-
-    })
+    }, 1000);
 }
 
+// Event listeners
+document.querySelector('#start-quiz').addEventListener('click', () => {
+    document.querySelector('.start-section').classList.add('hidden');
+    document.querySelector('.quiz-container').classList.remove('hidden');
+    startTimer();
+    renderQuiz();
+});
 
-
-
-
-
-//renderQuiz()
-
-
-function startTimer(){
-
-    function timer(duration,display){
-
-        let timer = duration, seconds,minutes;
-    
-        setInterval(function(){
-
-            minutes = parseInt(timer / 60, 10)
-            seconds = (parseInt(timer % 60, 10))
-    
-            minutes = minutes < 10 ? "0" + minutes : minutes
-            seconds = seconds < 10 ? "0" + seconds : seconds
-    
-            display.textContent = minutes + ':' + seconds
-    
-            if(--timer < 0){
-                timer = 0 
-            }
-        },1000)
+document.querySelector('#prev-btn').addEventListener('click', () => {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderQuiz();
     }
-    
+});
 
-    let time  = 20 * 60;
+document.querySelector('#next-btn').addEventListener('click', checkAnswer);
 
-    let display = document.querySelector('#timer')
-
-    timer(time,display)
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+document.querySelector('#submit-test').addEventListener('click', endQuiz);
