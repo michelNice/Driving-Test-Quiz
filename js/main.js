@@ -53,7 +53,7 @@ function renderQuiz() {
     // Set the question text
     questionContainer.textContent = currentQuestion.question;
 
-    // Clear existing options
+    // Clear existing option
     optionsContainer.innerHTML = '';
 
     // Populate options dynamically
