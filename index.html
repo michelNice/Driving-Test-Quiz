@@ -7,28 +7,32 @@
     <link rel="stylesheet" href="sass/main.css">
 </head>
 <body>
+    <header class="header">
+        <h1>Driving Test Quiz</h1>
+    </header>
 
     <main class="container">
-        <header class="header">
-            <h1>Driving Test Quiz</h1>
-        </header>
-    
-        <main class="container">
-            <p>Time Remaining: <span id="timer">20:00</span></p>
-            <section class="start-section">
-                <button id="start-quiz" type="button">Start Quiz</button>
-            </section>
-            <section class="quiz-container hidden">
-                <h3 id="question-text">Question will go here</h3>
-                <div id="options-container"></div>
-                <button id="submit-test" class="hidden">Submit Test</button>
-                <div class="navigation-buttons">
+        <p>Time Remaining: <span id="timer">02:00</span></p>
+
+        <section class="start-section">
+            <button id="start-quiz" type="button">Start Quiz</button>
+            <button id="restart-quiz" class="hidden">Restart Quiz</button>
+        </section>
+
+        <section class="quiz-container hide">
+            <h3 id="question-text">Question will go here</h3>
+            <div id="options-container"></div>
+            <div class="navigation-buttons">
+                <div class="arrow_button">
                     <button id="prev-btn" class="hidden">Prev</button>
                     <button id="next-btn">Next</button>
                 </div>
-            </section>
+                <button id="submit-test" class="hidden">Submit Test</button>
+            </div>
+        </section>
     </main>
 
     <script src="js/main.js"></script>
 </body>
 </html>
+
