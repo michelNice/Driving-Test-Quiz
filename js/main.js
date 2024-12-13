@@ -1,6 +1,6 @@
 const quizQuestions = [
     {
-        question: 'What is the legal blood alcohol concentration (BAC) limit for drivers in most countries?',
+        question: 'What is the legal blood alcohol concentration?',
         options: {
             a: '0.08%',
             b: '0.10%',
@@ -45,24 +45,19 @@ let currentQuestionIndex = 0;
 let score = 0;
 let timerInterval;
 
-
-
-
-
-
 function renderQuiz() {
     const questionContainer = document.querySelector('#question-text');
     const optionsContainer = document.querySelector('#options-container');
 
     const currentQuestion = quizQuestions[currentQuestionIndex];
 
-    // Set the question text
+    
     questionContainer.textContent = currentQuestion.question;
 
-    // Clear existing option
+   
     optionsContainer.innerHTML = '';
 
-    // Populate options dynamically
+    
     Object.keys(currentQuestion.options).forEach(optionKey => {
         const answerContainer = document.createElement('div');
         answerContainer.className = 'answer-container';
@@ -82,7 +77,7 @@ function renderQuiz() {
         optionsContainer.appendChild(answerContainer);
     });
 
-    // Adjust navigation buttons visibility
+    
     document.querySelector('#prev-btn').classList.toggle('hidden', currentQuestionIndex === 0);
     document.querySelector('#next-btn').classList.toggle('hidden', currentQuestionIndex === quizQuestions.length - 1);
     document.querySelector('#submit-test').classList.toggle('hidden', currentQuestionIndex !== quizQuestions.length - 1);
@@ -123,7 +118,7 @@ function endQuiz() {
 
 function startTimer() {
     const display = document.querySelector('#timer');
-    let time = 20 * 6; // 5 minutes in seconds
+    let time = 20 * 6; 
 
     timerInterval = setInterval(() => {
         const minutes = Math.floor(time / 60);
